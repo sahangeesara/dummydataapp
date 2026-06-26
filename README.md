@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📦 Next.js Products App (DummyJSON)
 
-## Getting Started
+A simple Next.js App Router project that fetches and displays products from the DummyJSON API.
 
-First, run the development server:
+🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+    ♦️ Next.js 13+ App Router
+    ♦️ Server-side data fetching
+    ♦️ Product listing from API
+    ♦️ Next.js Image optimization
+    ♦️ Loading UI support (loading.tsx)
+    ♦️ TypeScript support (optional)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📡 API Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    ♦️ Products API:
+  
+      https://dummyjson.com/products
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+    ♦️ Next.js
+    ♦️ React
+    ♦️ TypeScript
+    ♦️ Tailwind CSS
+    ♦️ DummyJSON API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  📂 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+           app/
+             ├── page.tsx
+             ├── loading.tsx
+             ├── layout.tsx
+            next.config.js
 
-## Deploy on Vercel
+⚙️ Installation
+  1. Clone the project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+            git clone https://github.com/sahangeesara/dummydataapp.git
+            cd dummydataapp
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Install dependencies:
+
+             npm install
+   
+4. Run development server
+   
+          npm run dev
+
+App runs at:
+
+         http://localhost:3000
+      
+🧠 How It Works
+
+Fetch Products
+
+      async function getData() {
+        const res = await fetch("https://dummyjson.com/products");
+      
+        if (!res.ok) {
+          throw new Error("Failed to fetch products");
+        }
+      
+        return res.json();
+      }
+      
+Render Products
+
+      const data = await getData();
+      
+      return (
+        <>
+          {data.products.map((product) => (
+            <div key={product.id}>
+              <Image
+                src={product.thumbnail}
+                alt={product.title}
+                width={200}
+                height={200}
+              />
+              <h2>{product.title}</h2>
+            </div>
+          ))}
+        </>
+      );
+      
+⚠️ Important Setup (Next Image)
+
+If images don’t load, add this to **next.config.js:**
+
+      const nextConfig = {
+        images: {
+          remotePatterns: [
+            {
+              protocol: "https",
+              hostname: "cdn.dummyjson.com",
+            },
+          ],
+        },
+      };
+
+    module.exports = nextConfig;
+    
+📸 Loading UI
+
+Create **app/loading.tsx** :
+
+    export default function Loading() {
+      return <h1>Loading...</h1>;
+    }
+    
+🎯 Learning Goals
+
+    ♦️ Understand Server Components in Next.js
+    ♦️ API fetching in App Router
+    ♦️ Dynamic rendering of lists
+    ♦️ Image optimization handling
+    
+👨‍💻 Author
+
+Sahan Geesara
+
+
+
+
+
+
+
+            
